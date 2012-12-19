@@ -1,23 +1,24 @@
 #Adaptor
 
 
+To start your server find an open port and set that as an enviormnet variable
+when executing the server. i.e.
+
+    PORT=12345 node bin/server.js
 
 
-###example/youtube.js 
-This example will post data to 
+You can then POST to the serer and it will validate your request and
+immediately respond confirming the validation. The server will then process
+POST to the thrid party API asynchronously. It will then POST the respone to
+the callback URL you provided allong with the adaptor variable that was sent.
 
 
-    POST /feeds/api/users/default/playlists HTTP/1.1
-    Host: gdata.youtube.com
-    Content-Type: application/atom+xml
-    Content-Length: 229
-    Authorization: Bearer 1/Vtinkoz7aCw_8moSJ9t3wXq-xoUeCmGgBqlU7OWkPsM
-    GData-Version: 2
-    X-GData-Key:
-    key=AI39si7zRWsNwnE7jCQ5KuyMKsx2hb8bkciN0Wo1fXKPA3aBcpixzjb7vkTDYAMvx-Nc2idAFYj7iXDjefpnsE9m4Ba2t-1fDA
+i.e.
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <entry xmlns="http://www.w3.org/2005/Atom"
-    xmlns:yt="http://gdata.youtube.com/schemas/2007">
-    <title type="text">Whoa a playlist</title>
-    <summary>This is my awesome playlist</summary></entry>
+ curl \
+ -d '{"payload" : "a whole lot of \n\n text\nwith line breaks and <xml> and spaces </xml>", "callback" : "URL", "adaptor": {"id": 123,
+ "name":"mailchimp"}}' \
+ -H "Content-Type: application/json" \
+ http://localhost:4444
+
+
