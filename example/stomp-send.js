@@ -1,3 +1,7 @@
+/*
+ * test comment
+ */
+
 var stomp = require('stomp');
 
 var max = process.argv[2] || 100;
